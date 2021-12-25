@@ -72,14 +72,15 @@ function App() {
     results: [{ waitTime: '--', updatedAt: '----/--/-- --:--:--' }],
   });
 
-  useEffect(async () => {
-    const { board, waitingTime, updateTime, results, averageTime, stdevTime } = await getData();
-    setData({ board, waitingTime, updateTime, results, averageTime, stdevTime });
+  useEffect(() => {
+    getData().then((data) => {
+      setData(data);
+    });
   }, []);
 
   const refreshData = () => {
-    getData().then(({ board, waitingTime, updateTime, results, averageTime, stdevTime }) => {
-      setData({ board, waitingTime, updateTime, results, averageTime, stdevTime });
+    getData().then((data) => {
+      setData(data);
     });
   };
 
@@ -92,6 +93,7 @@ function App() {
             <StatDisplay
               waitingTime={state.waitingTime}
               updateTime={state.updateTime}
+              getData={refreshData}
             />
             <Report
               averageTime={state.averageTime}
