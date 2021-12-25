@@ -3,9 +3,9 @@ import React from 'react';
 
 function StatDisplay(props) {
   return (
-    <Box textAlign='center' p='8px 24px' minW='xs' borderWidth='1px' borderRadius='lg'>
+    <Box textAlign='center' p='8px 24px' w='100%' borderWidth='1px' borderRadius='lg' overflow='hidden'>
       <Stat>
-        <StatLabel>预计排队时长</StatLabel>
+        <StatLabel fontSize='xl'>预计排队时长</StatLabel>
         <StatNumber
           fontSize='6xl'
           color={
@@ -18,8 +18,8 @@ function StatDisplay(props) {
         >
           {props.waitingTime}
         </StatNumber>
-        <StatHelpText>分钟</StatHelpText>
-        <StatHelpText>更新：{props.updateTime}</StatHelpText>
+        <StatHelpText fontSize='md'>分钟</StatHelpText>
+        <StatHelpText>更新于：{props.updateTime}</StatHelpText>
       </Stat>
     </Box>
   );

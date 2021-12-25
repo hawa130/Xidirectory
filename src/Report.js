@@ -19,10 +19,17 @@ function Report(props) {
   } = useForm();
 
   const onSubmit = async (data) => {
-    let { wait_time } = data;
-    wait_time = Number(wait_time);
-    const res = await axios.post('https://ncov-api.hawa130.com/1.1/classes/RNAtest',
-      { wait_time }, {
+    let { waitTime } = data;
+    waitTime = Number(waitTime);
+
+    const { averageTime, stdevTime } = props;
+    if (isNaN(waitTime) || waitTime < 0 || (waitTime > 240 && (Math.abs(waitTime - averageTime) > 40 * stdevTime))) {
+      alert('请输入合理的等待时间。');
+      return;
+    }
+
+    await axios.post('https://ncov-api.hawa130.com/1.1/classes/RNAtest',
+      { waitTime }, {
         headers: {
           'X-LC-Id': '2x27utDtFSuLNtGkWVwT1m7v-gzGzoHsz',
           'X-LC-Key': 'Da0dObuKbEzfjgsN6mxskA2p',
@@ -32,13 +39,13 @@ function Report(props) {
   };
 
   return (
-    <form onSubmit={handleSubmit(onSubmit)}>
+    <form onSubmit={handleSubmit(onSubmit)} style={{ width: '100%' }}>
       <VStack>
         <FormControl>
           <InputGroup>
-            <NumberInput>
-              <NumberInputField id='wait_time' placeholder='预估排队时间' borderRadius='8px 0 0 8px'
-                                {...register('wait_time', { required: true })} />
+            <NumberInput w='100%'>
+              <NumberInputField id='waitTime' placeholder='输入你的预估排队时间' borderRadius='8px 0 0 8px'
+                                {...register('waitTime', { required: true })} />
             </NumberInput>
             <InputRightAddon children='分钟' />
           </InputGroup>
@@ -48,6 +55,7 @@ function Report(props) {
           isLoading={isSubmitting}
           type='submit'
           variant='solid'
+          w='100%'
         >
           提交
         </Button>
