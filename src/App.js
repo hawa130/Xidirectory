@@ -14,12 +14,10 @@ const getData = async () => {
     });
   const result = res.data?.results[0];
   const waitingTime = result['wait_time'];
-  const sign = result['sign'];
   let updateTime = result['updatedAt'];
   updateTime = new Date(updateTime).toLocaleString();
   return {
     waitingTime,
-    sign,
     updateTime,
   };
 };
@@ -27,18 +25,17 @@ const getData = async () => {
 function App() {
   const [state, setData] = React.useState({
     waitingTime: '-',
-    sign: '-',
     updateTime: '--',
   });
 
   useEffect(async () => {
-    const { waitingTime, sign, updateTime } = await getData();
-    setData({ waitingTime, sign, updateTime });
+    const { waitingTime, updateTime } = await getData();
+    setData({ waitingTime, updateTime });
   }, []);
 
   const refreshData = () => {
-    getData().then(({ waitingTime, sign, updateTime }) => {
-      setData({ waitingTime, sign, updateTime });
+    getData().then(({ waitingTime, updateTime }) => {
+      setData({ waitingTime, updateTime });
     });
   };
 
@@ -49,7 +46,6 @@ function App() {
           <VStack align='center'>
             <StatDisplay
               waitingTime={state.waitingTime}
-              sign={state.sign}
               updateTime={state.updateTime}
             />
             <Report getData={refreshData} />

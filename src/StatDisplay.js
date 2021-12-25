@@ -16,7 +16,7 @@ function StatDisplay(props) {
                 'green.500'
           }
         >
-          {props.sign} {props.waitingTime}
+          {props.waitingTime}
         </StatNumber>
         <StatHelpText>分钟</StatHelpText>
         <StatHelpText>更新：{props.updateTime}</StatHelpText>
