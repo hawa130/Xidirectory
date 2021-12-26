@@ -7,19 +7,19 @@ function MainPage() {
   return (
     <Tabs variant='line' align='center' colorScheme='teal' isLazy={true}>
       <TabList>
-        <Tab>排队分享</Tab>
         <Tab>服务查询</Tab>
+        <Tab>排队分享</Tab>
         <Tab>关于</Tab>
       </TabList>
 
       <TabPanels>
-        <TabPanel>
-          <TimeShare />
-        </TabPanel>
         <TabPanel p='0'>
           <InfoPage />
         </TabPanel>
-        <TabPanel p='0'>
+        <TabPanel>
+          <TimeShare />
+        </TabPanel>
+        <TabPanel>
           <AboutPage />
         </TabPanel>
       </TabPanels>

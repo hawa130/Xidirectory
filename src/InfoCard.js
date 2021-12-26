@@ -1,5 +1,5 @@
 import { Box, Divider, HStack, SimpleGrid, Spacer, Tag, Text } from '@chakra-ui/react';
-import { BookOne, ChopsticksFork, HangerTwo, MailPackage, Printer, Shopping, WaterLevel } from '@icon-park/react';
+import { AdProduct, BookOne, ChopsticksFork, Hanger, Printer, Shopping, WaterLevel } from '@icon-park/react';
 
 function InfoCard(props) {
   const { data } = props;
@@ -9,13 +9,13 @@ function InfoCard(props) {
       case '饮食':
         return <ChopsticksFork theme='outline' />;
       case '生活':
-        return <HangerTwo theme='outline' />;
+        return <Hanger theme='outline' />;
       case '打印':
         return <Printer theme='outline' />;
       case '学习':
         return <BookOne theme='outline' />;
       case '快递':
-        return <MailPackage theme='outline' />;
+        return <AdProduct theme='outline' />;
       case '超市':
         return <Shopping theme='outline' />;
       case '饮用水':

@@ -1,13 +1,14 @@
-import { Container, Link, ListItem, Text, UnorderedList } from '@chakra-ui/react';
+import { Container, Heading, Link, ListItem, Text, UnorderedList } from '@chakra-ui/react';
 import { Share } from '@icon-park/react';
 
 function AboutPage() {
   return (
-    <Container textAlign='justify'>
+    <Container textAlign='justify' maxW='container.md'>
+      <Heading>关于本站</Heading>
       <Text my='8px'>
         本站数据来自于共享文档整理以及人肉调查，旨在为西电学子提供便利的校内相关数据查询服务。由于是人工维护，数据的时效性无法保证。
-        若发现与实际情况有出入可联系 <Link color='teal' href='mailto:superbart_chen@qq.com'>SuperBart</Link>、<Link color='teal'
-                                                                                                     href='mailto:handanwanga@outlook.com'>hawa130</Link> 进行数据更新。
+        若发现与实际情况有出入可联系 <Link color='teal' href='mailto:superbart_chen@qq.com'>SuperBart</Link>、
+        <Link color='teal' href='mailto:handanwanga@outlook.com'>hawa130</Link> 进行数据更新。
       </Text>
       <Text my='8px'>
         感谢 <Link color='teal' href='https://docs.qq.com/sheet/DWmttV0hZbFFYQmVv?tab=BB08J2' isExternal>腾讯互助文档 <Share

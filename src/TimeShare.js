@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react';
-import { Container, HStack, Text, VStack } from '@chakra-ui/react';
+import { Container, HStack, Skeleton, Stack, Text, VStack } from '@chakra-ui/react';
 import StatDisplay from './StatDisplay';
 import Report from './Report';
 import axios from 'axios';
@@ -64,11 +64,15 @@ const getData = async () => {
 
 function TimeShare() {
   const [state, setData] = React.useState({
-    waitingTime: '--',
+    waitingTime: <Skeleton width='100px' height='80px' />,
     updateTime: '----/--/-- --:--:--',
     averageTime: '--',
     stdevTime: '--',
-    board: { title: '公告', content: '--', updatedAt: '----/--/-- --:--:--' },
+    board: {
+      title: '公告',
+      content: <Stack><Skeleton height='18px' /><Skeleton height='18px' /></Stack>,
+      updatedAt: '----/--/-- --:--:--',
+    },
     results: [{ waitTime: '--', updatedAt: '----/--/-- --:--:--' }],
   });
 

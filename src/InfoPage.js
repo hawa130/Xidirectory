@@ -11,7 +11,7 @@ const getData = async (para) => {
         'X-LC-Key': 'Da0dObuKbEzfjgsN6mxskA2p',
       },
       params: {
-        order: '-updatedAt',
+        order: '-status,-updatedAt',
         limit: 1000,
         ...para,
       },
@@ -31,16 +31,18 @@ const getData = async (para) => {
 
 function InfoPage(props) {
   const [state, setData] = React.useState([]);
+  const [loading, setLoading] = React.useState(true);
 
   useEffect(() => {
     getData().then((data) => {
+      setLoading(false);
       setData(data);
     });
   }, []);
 
   return (
     <Container maxW='container.xl' p='0'>
-      <InfoDisplay infoList={state} />
+      <InfoDisplay infoList={state} loading={loading} />
     </Container>
   );
 }
