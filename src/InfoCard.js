@@ -26,7 +26,7 @@ function InfoCard(props) {
   };
 
   return (
-    <SimpleGrid minChildWidth='280px' spacing={2}>
+    <SimpleGrid minChildWidth='300px' spacing={2}>
       {
         data.map((item) => {
           return (
@@ -39,13 +39,15 @@ function InfoCard(props) {
               <Spacer h='8px' />
               <HStack>
                 <Text size='sm' color='grey'>{getIcon(item.category)}</Text>
-                {
-                  item.tags.map((tag) => {
-                    return (
-                      <Tag key={tag}>{tag}</Tag>
-                    );
-                  })
-                }
+                <HStack flexFlow='wrap'>
+                  {
+                    item.tags.map((tag) => {
+                      return (
+                        <Tag key={tag}>{tag}</Tag>
+                      );
+                    })
+                  }
+                </HStack>
               </HStack>
               <Divider m='8px 0' />
               <Text textAlign='justify' fontSize='sm' color='dimgrey'>

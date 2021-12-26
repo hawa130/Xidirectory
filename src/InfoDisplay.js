@@ -1,40 +1,29 @@
 import InfoCard from './InfoCard';
-import axios from 'axios';
-import React, { useEffect } from 'react';
+import { Tab, TabList, TabPanel, TabPanels, Tabs } from '@chakra-ui/react';
 
-const getData = async () => {
-  const res = await axios.get('https://ncov-api.hawa130.com/1.1/classes/info?order=-updatedAt',
-    {
-      headers: {
-        'X-LC-Id': '2x27utDtFSuLNtGkWVwT1m7v-gzGzoHsz',
-        'X-LC-Key': 'Da0dObuKbEzfjgsN6mxskA2p',
-      },
-    });
-  const resList = res.data?.results;
-  return (resList.map((row) => {
-    return {
-      name: row?.name,
-      status: row?.status,
-      category: row?.category,
-      tags: row?.tags,
-      description: row?.description,
-      updatedAt: new Date(row?.updatedAt).toLocaleString('zh-CN', { hour12: false }),
-    };
-  }));
-};
+const categories = ['最近更新', '饮食', '生活', '打印', '学习', '快递', '超市', '饮用水'];
 
 function InfoDisplay(props) {
-  const [state, setData] = React.useState([]);
-
-  useEffect(() => {
-    getData().then((data) => {
-      setData(data);
-      console.log(state);
-    });
-  }, []);
-
+  const { infoList } = props;
   return (
-    <InfoCard data={state} />
+    <Tabs variant='soft-rounded' align='center' colorScheme='gray' p='0'>
+      <TabList flexFlow='wrap' paddingTop='16px'>
+        {categories.map((item) => {
+          return <Tab>{item}</Tab>;
+        })}
+      </TabList>
+      <TabPanels>
+        {categories.map((item) => {
+          return <TabPanel key={item}>
+            <InfoCard data={infoList.filter((row) => {
+              const category = row.category;
+              return item === '最近更新' || category === item;
+            })} />
+          </TabPanel>;
+        })}
+      </TabPanels>
+    </Tabs>
+
   );
 }
 
