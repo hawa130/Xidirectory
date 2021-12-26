@@ -7,19 +7,19 @@ function InfoCard(props) {
   const getIcon = (item) => {
     switch (item) {
       case '饮食':
-        return <ChopsticksFork theme='outline' fill='#333' />;
+        return <ChopsticksFork theme='outline' />;
       case '生活':
-        return <HangerTwo theme='outline' fill='#333' />;
+        return <HangerTwo theme='outline' />;
       case '打印':
-        return <Printer theme='outline' fill='#333' />;
+        return <Printer theme='outline' />;
       case '学习':
-        return <BookOne theme='outline' fill='#333' />;
+        return <BookOne theme='outline' />;
       case '快递':
-        return <MailPackage theme='outline' fill='#333' />;
+        return <MailPackage theme='outline' />;
       case '超市':
-        return <Shopping theme='outline' fill='#333' />;
+        return <Shopping theme='outline' />;
       case '饮用水':
-        return <WaterLevel theme='outline' fill='#333' />;
+        return <WaterLevel theme='outline' />;
       default:
         return item;
     }
@@ -38,7 +38,7 @@ function InfoCard(props) {
               </HStack>
               <Spacer h='8px' />
               <HStack>
-                <Text size='sm' color='grey'>{getIcon(item.category)}</Text>
+                <Text size='sm' color='gray.600'>{getIcon(item.category)}</Text>
                 <HStack flexFlow='wrap'>
                   {
                     item.tags.map((tag) => {
@@ -50,11 +50,11 @@ function InfoCard(props) {
                 </HStack>
               </HStack>
               <Divider m='8px 0' />
-              <Text textAlign='justify' fontSize='sm' color='dimgrey'>
+              <Text textAlign='justify' fontSize='sm' color='gray.600'>
                 {item?.description ? item.description : '无描述'}
               </Text>
               <Divider m='8px 0' />
-              <Text textAlign='right' fontSize='sm' color='grey'>更新于：{item.updatedAt}</Text>
+              <Text textAlign='right' fontSize='sm' color='gray.400'>更新于：{item.updatedAt}</Text>
             </Box>);
         })
       }

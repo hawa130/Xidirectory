@@ -1,6 +1,7 @@
 import { Tab, TabList, TabPanel, TabPanels, Tabs } from '@chakra-ui/react';
 import TimeShare from './TimeShare';
 import InfoPage from './InfoPage';
+import AboutPage from './AboutPage';
 
 function MainPage() {
   return (
@@ -8,6 +9,7 @@ function MainPage() {
       <TabList>
         <Tab>排队分享</Tab>
         <Tab>服务查询</Tab>
+        <Tab>关于</Tab>
       </TabList>
 
       <TabPanels>
@@ -16,6 +18,9 @@ function MainPage() {
         </TabPanel>
         <TabPanel p='0'>
           <InfoPage />
+        </TabPanel>
+        <TabPanel p='0'>
+          <AboutPage />
         </TabPanel>
       </TabPanels>
     </Tabs>
