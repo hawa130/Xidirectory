@@ -9,9 +9,9 @@ function StatDisplay(props) {
   );
 
   const refresh = async () => {
-    setData({ textTip: '刷新中...' });
+    await ({ textTip: '刷新中...' });
     await props.getData();
-    setData({ textTip: '刷新成功' });
+    await setData({ textTip: '刷新成功' });
     setTimeout(() => {
       setData({ textTip: '点击可刷新' });
     }, 3000);
@@ -42,7 +42,7 @@ function StatDisplay(props) {
           >
             {props.waitingTime}
           </StatNumber>
-          <StatHelpText display='inline-block' fontSize='md'>分钟</StatHelpText>
+          <StatHelpText display='inline-block' fontSize='md'> 分钟</StatHelpText>
         </Box>
         <StatHelpText>更新于：{props.updateTime}</StatHelpText>
         <StatHelpText>{state.textTip}</StatHelpText>
