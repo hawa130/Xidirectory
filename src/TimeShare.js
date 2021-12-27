@@ -1,20 +1,24 @@
 import React, { useEffect } from 'react';
 import { Container, HStack, Skeleton, Stack, Text, VStack } from '@chakra-ui/react';
 import StatDisplay from './StatDisplay';
-import Report from './ReportOld'; // 旧版API
+import Report from './Report'; // 旧版API
 import axios from 'axios';
 import TableDisplay from './TableDisplay';
 import Board from './Board';
+import md5 from 'js-md5';
 
 const getReportData = async () => {
-  const res = await axios.get('https://ncov-api.hawa130.com/1.1/classes/RNAtest?order=-createdAt&limit=20',
-    {
-      headers: {
-        'X-LC-Id': '2x27utDtFSuLNtGkWVwT1m7v-gzGzoHsz',
-        'X-LC-Key': 'Da0dObuKbEzfjgsN6mxskA2p',
-      },
-    });
+  const res = await axios.get('https://ncov-api.geek-tech.club/api/records/?during=3600');
   const resList = res.data?.results;
+  if (resList.length === 0) {
+    return {
+      waitingTime: '--',
+      updateTime: '无最近数据',
+      averageTime: NaN,
+      stdevTime: NaN,
+      results: [],
+    };
+  }
   const rawResults = resList.map((row) => {
     return {
       waitTime: row?.waitTime,
@@ -37,12 +41,16 @@ const getReportData = async () => {
   };
 };
 
+const timestamp = Date.now();
+const appKey = 'Da0dObuKbEzfjgsN6mxskA2p';
+const tmp = md5(`${timestamp}${appKey}`);
+const sign = `${tmp},${timestamp}`;
 const getBoardData = async () => {
   const rawBoard = await axios.get('https://ncov-api.hawa130.com/1.1/classes/message/61c7746e097c2b17a58082e1',
     {
       headers: {
         'X-LC-Id': '2x27utDtFSuLNtGkWVwT1m7v-gzGzoHsz',
-        'X-LC-Key': 'Da0dObuKbEzfjgsN6mxskA2p',
+        'X-LC-Sign': sign,
       },
     });
   const board = rawBoard.data;
@@ -102,16 +110,16 @@ function TimeShare() {
           stdevTime={state.stdevTime}
           getData={refreshData}
         />
-        <HStack>
-          <Text>最近 {state.results.length} 次等待时间平均值</Text>
-          <Text fontSize='xl' as='strong' color={
+        <Text>最近 1 小时的 {state.results.length} 次提交等待时间平均值</Text>
+        <HStack align='baseline' style={{ marginTop: 0 }}>
+          <Text fontSize='2xl' as='strong' color={
             state.averageTime > 30 ?
               'red.500' :
               state.averageTime > 10 ?
                 'yellow.500' :
                 'green.500'
           }>
-            {state.averageTime}
+            {Math.round(state.averageTime)}
           </Text>
           <Text>分钟</Text>
         </HStack>

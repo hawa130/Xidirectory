@@ -10,6 +10,7 @@ import {
 import React from 'react';
 import { useForm } from 'react-hook-form';
 import axios from 'axios';
+import md5 from 'js-md5';
 
 function Report(props) {
   const {
@@ -28,11 +29,15 @@ function Report(props) {
       return;
     }
 
+    const timestamp = Date.now();
+    const appKey = 'Da0dObuKbEzfjgsN6mxskA2p';
+    const tmp = md5(`${timestamp}${appKey}`);
+    const sign = `${tmp},${timestamp}`;
     await axios.post('https://ncov-api.hawa130.com/1.1/classes/RNAtest',
       { waitTime }, {
         headers: {
           'X-LC-Id': '2x27utDtFSuLNtGkWVwT1m7v-gzGzoHsz',
-          'X-LC-Key': 'Da0dObuKbEzfjgsN6mxskA2p',
+          'X-LC-Sign': sign,
         },
       });
     props.getData();

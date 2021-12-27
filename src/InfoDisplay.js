@@ -72,7 +72,7 @@ function InfoDisplay(props) {
         </div>
       </Collapse>
       <Collapse in={!isOpen} animateOpacity>
-        {loading ? <Spinner /> : null}
+        {loading ? <Spinner size='xl' my='25%' /> : null}
         <TabPanels>
           <TabPanel>
             <InfoCard data={infoList} />

@@ -2,13 +2,18 @@ import { Container } from '@chakra-ui/react';
 import InfoDisplay from './InfoDisplay';
 import axios from 'axios';
 import React, { useEffect } from 'react';
+import md5 from 'js-md5';
 
 const getData = async (para) => {
+  const timestamp = Date.now();
+  const appKey = 'Da0dObuKbEzfjgsN6mxskA2p';
+  const tmp = md5(`${timestamp}${appKey}`);
+  const sign = `${tmp},${timestamp}`;
   const res = await axios.get('https://ncov-api.hawa130.com/1.1/classes/info',
     {
       headers: {
         'X-LC-Id': '2x27utDtFSuLNtGkWVwT1m7v-gzGzoHsz',
-        'X-LC-Key': 'Da0dObuKbEzfjgsN6mxskA2p',
+        'X-LC-Sign': sign,
       },
       params: {
         order: '-status,-updatedAt',
@@ -19,6 +24,7 @@ const getData = async (para) => {
   const resList = res.data?.results;
   return (resList.map((row) => {
     return {
+      objectId: row?.objectId,
       name: row?.name,
       status: row?.status,
       category: row?.category,

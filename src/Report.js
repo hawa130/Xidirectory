@@ -22,7 +22,6 @@ function Report(props) {
     const appId = '2053958429';
     // eslint-disable-next-line no-undef
     const captcha = new TencentCaptcha(appId, (res) => {
-      console.log(res);
       if (res.ret === 0) {
         onSubmit({
           Ticket: res.ticket,
