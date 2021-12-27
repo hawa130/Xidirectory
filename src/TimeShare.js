@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
 import { Container, HStack, Skeleton, Stack, Text, VStack } from '@chakra-ui/react';
 import StatDisplay from './StatDisplay';
-import Report from './Report';
+import Report from './ReportOld'; // 旧版API
 import axios from 'axios';
 import TableDisplay from './TableDisplay';
 import Board from './Board';

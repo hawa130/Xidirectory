@@ -18,22 +18,6 @@ function Report(props) {
     formState: { isSubmitting },
   } = useForm();
 
-  const onTencentCaptcha = (submitData) => {
-    const appId = '2053958429';
-    // eslint-disable-next-line no-undef
-    const captcha = new TencentCaptcha(appId, (res) => {
-      console.log(res);
-      if (res.ret === 0) {
-        onSubmit({
-          Ticket: res.ticket,
-          Randstr: res.randstr,
-          ...submitData,
-        });
-      }
-    });
-    captcha.show();
-  };
-
   const onSubmit = async (data) => {
     let { waitTime } = data;
     waitTime = Number(waitTime);
@@ -44,17 +28,18 @@ function Report(props) {
       return;
     }
 
-    await axios.post('https://ncov-api.geek-tech.club/api/new_record/',
-      {
-        Ticket: data.Ticket,
-        Randstr: data.Randstr,
-        result: waitTime,
+    await axios.post('https://ncov-api.hawa130.com/1.1/classes/RNAtest',
+      { waitTime }, {
+        headers: {
+          'X-LC-Id': '2x27utDtFSuLNtGkWVwT1m7v-gzGzoHsz',
+          'X-LC-Key': 'Da0dObuKbEzfjgsN6mxskA2p',
+        },
       });
     props.getData();
   };
 
   return (
-    <form onSubmit={handleSubmit(onTencentCaptcha)} style={{ width: '100%' }}>
+    <form onSubmit={handleSubmit(onSubmit)} style={{ width: '100%' }}>
       <VStack>
         <FormControl>
           <InputGroup>
@@ -66,7 +51,6 @@ function Report(props) {
           </InputGroup>
         </FormControl>
         <Button
-          id='TencentCaptcha'
           colorScheme={'teal'}
           isLoading={isSubmitting}
           type='submit'
