@@ -30,13 +30,13 @@ function InfoCard(props) {
       {
         data.map((item) => {
           return (
-            <Box borderWidth='1px' borderRadius='lg' overflow='hidden' p='8px 16px'>
-              <HStack w='100%'>
+            <Box borderWidth='1px' borderRadius='lg' overflow='hidden' p='8px 16px' display='flex'
+                 flexDirection='column'>
+              <HStack w='100%' mb='8px'>
                 <Text fontSize='lg' fontWeight='semibold'>{item.name}</Text>
                 <Spacer />
                 <Tag colorScheme={item.status ? 'green' : 'red'}>{item.status ? '开放' : '关闭'}</Tag>
               </HStack>
-              <Spacer h='8px' />
               <HStack>
                 <Text size='sm' color='gray.600'>{getIcon(item.category)}</Text>
                 <HStack flexFlow='wrap'>
@@ -50,7 +50,7 @@ function InfoCard(props) {
                 </HStack>
               </HStack>
               <Divider m='8px 0' />
-              <Text textAlign='justify' fontSize='sm' color='gray.600'>
+              <Text textAlign='justify' fontSize='sm' color='gray.600' flexGrow='1'>
                 {item?.description ? item.description : '无描述'}
               </Text>
               <Divider m='8px 0' />
