@@ -2,9 +2,12 @@ import {
   Alert,
   AlertIcon,
   Button,
+  Collapse,
   FormControl,
   FormLabel,
   Input,
+  Link,
+  ListItem,
   Modal,
   ModalBody,
   ModalCloseButton,
@@ -13,7 +16,9 @@ import {
   ModalHeader,
   ModalOverlay,
   Switch,
+  Text,
   Textarea,
+  UnorderedList,
 } from '@chakra-ui/react';
 import { useForm } from 'react-hook-form';
 import axios from 'axios';
@@ -68,14 +73,29 @@ function InfoReport(props) {
     }
   };
 
+  const [show, setShow] = React.useState(false);
+
+  const handleToggle = () => setShow(!show);
+
   return (
     <Modal closeOnOverlayClick={false} isOpen={isOpen} onClose={onClose} autoFocus={false}>
       <ModalOverlay />
       <ModalContent>
         <form onSubmit={handleSubmit(onSubmit)}>
-          <ModalHeader>上报数据</ModalHeader>
+          <ModalHeader>错误数据上报</ModalHeader>
           <ModalCloseButton />
           <ModalBody pb={6}>
+            <Text>请在这里填写<strong>正确</strong>的数据，我们将在审核后展示。</Text>
+            <Text textAlign='right' color='teal'><Link
+              onClick={handleToggle}>{!show ? '显示填写指南' : '隐藏填写指南'}</Link></Text>
+            <Collapse in={show}>
+              <Text as='strong'>填写指南</Text>
+              <UnorderedList>
+                <ListItem><Text>描述可以填写一些商家的备注，可以参考现有的填写，信息传达到位即可。</Text></ListItem>
+                <ListItem><Text>附加信息可以任意发挥，可以是消息来源，也可以是自己想说的话。</Text></ListItem>
+              </UnorderedList>
+              <Text mb={3}>数据库的准确有效需要大家的共同维护，请务必确认自己提供的数据是准确的。</Text>
+            </Collapse>
             <FormControl isRequired>
               <FormLabel>名称</FormLabel>
               <Input {...register('name')} />
@@ -96,7 +116,7 @@ function InfoReport(props) {
               !state.isDisabled ? null :
                 <Alert status='success' my={2}>
                   <AlertIcon />
-                  数据提交成功，将于审核通过后更新。
+                  感谢你的提交，今天你又为数据库的维护出了一份力呢！
                 </Alert>
             }
           </ModalBody>
