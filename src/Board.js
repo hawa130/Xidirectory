@@ -6,7 +6,8 @@ function Board(props) {
       <HStack>
         <Text as='strong'>{props.board.title}</Text>
         <Spacer />
-        <Text color='gray.400' fontSize='sm'>{props.board.updatedAt}</Text>
+        {/*时间已隐藏*/}
+        <Text color='gray.400' fontSize='sm' display='none'>{props.board.updatedAt}</Text>
       </HStack>
       <Text>{props.board.content}</Text>
     </Box>

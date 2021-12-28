@@ -5,7 +5,6 @@ import Report from './Report'; // 旧版API
 import axios from 'axios';
 import TableDisplay from './TableDisplay';
 import Board from './Board';
-import md5 from 'js-md5';
 
 const getReportData = async () => {
   const res = await axios.get('https://ncov-api.geek-tech.club/api/records/?during=3600');
@@ -41,23 +40,15 @@ const getReportData = async () => {
   };
 };
 
-const timestamp = Date.now();
-const appKey = 'Da0dObuKbEzfjgsN6mxskA2p';
-const tmp = md5(`${timestamp}${appKey}`);
-const sign = `${tmp},${timestamp}`;
 const getBoardData = async () => {
-  const rawBoard = await axios.get('https://ncov-api.hawa130.com/1.1/classes/message/61c7746e097c2b17a58082e1',
-    {
-      headers: {
-        'X-LC-Id': '2x27utDtFSuLNtGkWVwT1m7v-gzGzoHsz',
-        'X-LC-Sign': sign,
-      },
-    });
-  const board = rawBoard.data;
+  const rawBoard = await axios.get('https://ncov-api.geek-tech.club/api/boards/');
+  const boards = rawBoard.data?.boards;
+  const board = boards[0];
   return {
-    title: board['title'],
+    title: '公告',
     content: board['content'],
-    updatedAt: new Date(board['updatedAt']).toLocaleString('zh-CN', { hour12: false }),
+    // updatedAt: new Date(board['createAt']).toLocaleString('zh-CN', { hour12: false }),
+    updatedAt: board['createAt'],
   };
 };
 

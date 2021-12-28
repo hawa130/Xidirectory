@@ -7,7 +7,7 @@ function AboutPage() {
       <Heading>关于本站</Heading>
       <Text my='8px'>
         本站数据来自于共享文档整理以及人肉调查，旨在为西电学子提供便利的校内相关数据查询服务。由于是人工维护，数据的时效性无法保证。
-        若发现与实际情况有出入可点击卡片左下角「报错」进行数据提交。
+        若发现与实际情况有出入可点击卡片左下角「纠错」进行数据提交。
       </Text>
       <Text my='8px'>
         如有未收录的商家，可联系维护者
@@ -37,8 +37,10 @@ function AboutPage() {
           <Link href='https://myxdu.moefactory.com/ncov/' isExternal>本数据库电表内嵌版本 <Share size='12' /></Link>
         </ListItem>
       </UnorderedList>
-      <Text my='8px'>感谢以下同学的支持：Yangxiansen。</Text>
-      <Text my='8px'>使用的 UI 框架：<Link href='https://chakra-ui.com/' isExternal>Chakra UI。</Link></Text>
+      <Text my='8px'>感谢对策府库的宣传。</Text>
+      <Text my='8px'>感谢以下同学的支持：Dimole、Yangxiansen。</Text>
+      <Text my='8px'>使用的 UI 框架：<Link href='https://chakra-ui.com/' isExternal>Chakra UI <Share
+        size='12' /></Link>。</Text>
       <Text my='8px'>疫情终将战胜，一起加油！</Text>
       <Text textAlign='right'><Link href='https://www.hawa130.com/' isExternal>hawa130</Link></Text>
       <Text textAlign='right'>2021/12/26</Text>

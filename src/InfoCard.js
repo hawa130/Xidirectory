@@ -61,12 +61,12 @@ function InfoCard(props) {
                   </HStack>
                 </HStack>
                 <Divider m='8px 0' />
-                <Text textAlign='justify' fontSize='sm' color='gray.600' flexGrow='1'>
+                <Text textAlign='justify' fontSize='sm' flexGrow='1'>
                   {item?.description ? item.description : '无描述'}
                 </Text>
                 <Divider m='8px 0' />
                 <HStack>
-                  <Link fontSize='sm' onClick={() => handleReport(item)}>报错</Link>
+                  <Link fontSize='sm' onClick={() => handleReport(item)}>纠错</Link>
                   <Spacer />
                   <Text textAlign='right' fontSize='sm' color='gray.400'>更新于：{item.updatedAt}</Text>
                 </HStack>

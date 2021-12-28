@@ -19,6 +19,18 @@ function Report(props) {
   } = useForm();
 
   const onTencentCaptcha = (submitData) => {
+    const { averageTime, stdevTime } = props;
+    let { waitTime } = submitData;
+    waitTime = Number(waitTime);
+
+    // console.log(averageTime, stdevTime, waitTime);
+
+    if (isNaN(waitTime) || waitTime < 0 ||
+      ((waitTime > 20 || waitTime < 5) && (Math.abs(waitTime - averageTime) > 3 * stdevTime))) {
+      alert('请输入合理的等待时间。');
+      return;
+    }
+
     const appId = '2053958429';
     // eslint-disable-next-line no-undef
     const captcha = new TencentCaptcha(appId, (res) => {
@@ -26,7 +38,7 @@ function Report(props) {
         onSubmit({
           Ticket: res.ticket,
           Randstr: res.randstr,
-          ...submitData,
+          result: waitTime,
         });
       }
     });
@@ -34,21 +46,7 @@ function Report(props) {
   };
 
   const onSubmit = async (data) => {
-    let { waitTime } = data;
-    waitTime = Number(waitTime);
-
-    const { averageTime, stdevTime } = props;
-    if (isNaN(waitTime) || waitTime < 0 || (waitTime > 120 && (Math.abs(waitTime - averageTime) > 5 * stdevTime))) {
-      alert('请输入合理的等待时间。');
-      return;
-    }
-
-    await axios.post('https://ncov-api.geek-tech.club/api/new_record/',
-      {
-        Ticket: data.Ticket,
-        Randstr: data.Randstr,
-        result: waitTime,
-      });
+    await axios.post('https://ncov-api.geek-tech.club/api/new_record/', data);
     props.getData();
   };
 

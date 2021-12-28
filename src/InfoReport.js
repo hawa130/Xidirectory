@@ -7,6 +7,7 @@ import {
   Input,
   Modal,
   ModalBody,
+  ModalCloseButton,
   ModalContent,
   ModalFooter,
   ModalHeader,
@@ -68,11 +69,12 @@ function InfoReport(props) {
   };
 
   return (
-    <Modal closeOnOverlayClick={false} isOpen={isOpen} onClose={onClose} autoFocus={true}>
+    <Modal closeOnOverlayClick={false} isOpen={isOpen} onClose={onClose} autoFocus={false}>
       <ModalOverlay />
       <ModalContent>
         <form onSubmit={handleSubmit(onSubmit)}>
           <ModalHeader>上报数据</ModalHeader>
+          <ModalCloseButton />
           <ModalBody pb={6}>
             <FormControl isRequired>
               <FormLabel>名称</FormLabel>
@@ -94,7 +96,7 @@ function InfoReport(props) {
               !state.isDisabled ? null :
                 <Alert status='success' my={2}>
                   <AlertIcon />
-                  数据提交成功
+                  数据提交成功，将于审核通过后更新。
                 </Alert>
             }
           </ModalBody>
