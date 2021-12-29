@@ -19,14 +19,14 @@ function Report(props) {
   } = useForm();
 
   const onTencentCaptcha = (submitData) => {
-    const { averageTime, stdevTime } = props;
+    const { averageTime, stdevTime, resultLength } = props;
     let { waitTime } = submitData;
     waitTime = Number(waitTime);
 
     // console.log(averageTime, stdevTime, waitTime);
 
     if (isNaN(waitTime) || waitTime < 0 ||
-      ((waitTime > 20 || waitTime < 5) && (Math.abs(waitTime - averageTime) > 3 * stdevTime))) {
+      ((resultLength > 6) && (waitTime > 25 || waitTime < 5) && (Math.abs(waitTime - averageTime) > 3 * stdevTime))) {
       alert('请输入合理的等待时间。');
       return;
     }

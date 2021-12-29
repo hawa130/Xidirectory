@@ -16,10 +16,10 @@ function MainPage() {
         <TabPanel p='0'>
           <InfoPage />
         </TabPanel>
-        <TabPanel>
+        <TabPanel p='0'>
           <TimeShare />
         </TabPanel>
-        <TabPanel>
+        <TabPanel p='0'>
           <AboutPage />
         </TabPanel>
       </TabPanels>

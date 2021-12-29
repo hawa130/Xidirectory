@@ -9,7 +9,9 @@ function Board(props) {
         {/*时间已隐藏*/}
         <Text color='gray.400' fontSize='sm' display='none'>{props.board.updatedAt}</Text>
       </HStack>
-      <Text>{props.board.content}</Text>
+      <Text>
+        <div dangerouslySetInnerHTML={{ __html: props.board.content }} />
+      </Text>
     </Box>
   );
 }

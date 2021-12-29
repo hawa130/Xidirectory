@@ -62,7 +62,13 @@ function InfoCard(props) {
                 </HStack>
                 <Divider m='8px 0' />
                 <Text textAlign='justify' fontSize='sm' flexGrow='1'>
-                  {item?.description ? item.description : '无描述'}
+                  <div
+                    style={{
+                      'ul': {
+                        paddingLeft: '20px',
+                      },
+                    }}
+                    dangerouslySetInnerHTML={{ __html: item?.description ? item.description : '无描述' }} />
                 </Text>
                 <Divider m='8px 0' />
                 <HStack>

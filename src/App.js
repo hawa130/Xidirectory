@@ -1,7 +1,8 @@
+import './App.css';
+import '@icon-park/react/styles/index.css';
 import React from 'react';
 import { ChakraProvider, Link, Text } from '@chakra-ui/react';
 import MainPage from './MainPage';
-import '@icon-park/react/styles/index.css';
 import theme from './theme';
 
 function App() {
