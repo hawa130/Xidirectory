@@ -1,7 +1,7 @@
 import { Tab, TabList, TabPanel, TabPanels, Tabs } from '@chakra-ui/react';
-import TimeShare from './TimeShare';
-import InfoPage from './InfoPage';
-import AboutPage from './AboutPage';
+import TimeShare from './Queue/TimeShare';
+import InfoPage from './Info/InfoPage';
+import AboutPage from './About/AboutPage';
 
 function MainPage() {
   return (
