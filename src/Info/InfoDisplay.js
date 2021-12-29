@@ -55,7 +55,7 @@ function InfoDisplay(props) {
               id='search-input'
               variant='filled'
               borderRadius='99px'
-              placeholder='搜索名称、分类、标签'
+              placeholder='搜索全部范围的名称、标签'
               onChange={handleChange}
             />
           </InputGroup>
