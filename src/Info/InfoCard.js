@@ -50,7 +50,7 @@ function InfoCard(props) {
                 </HStack>
                 <HStack>
                   <Text size='sm' color='gray.600'>{getIcon(item.category)}</Text>
-                  <HStack flexFlow='wrap'>
+                  <HStack shouldWrapChildren={true}>
                     {
                       item.tags.map((tag) => {
                         return (

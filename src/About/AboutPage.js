@@ -17,7 +17,7 @@ function AboutPage() {
         <Text my='8px'>Q：如何进行食堂数据库错误数据上报？</Text>
         <Text>A：点击<strong>价格数字</strong>即可弹出上报界面。</Text>
         <Heading my='16px'>关于本站</Heading>
-        <Text my='8px'>本站提供新冠肺炎疫情影响下西安电子科技大学校内服务状况查询、核酸检测排队时长分享服务。</Text>
+        <Text my='8px'>本站提供新冠肺炎疫情影响下西安电子科技大学的校内食堂菜单、校内服务状况查询、核酸检测排队时长分享服务。</Text>
         <Text my='8px'>
           数据来自于共享文档整理、维护志愿者的人肉调查以及热心同学的提交（可以点击「纠错」进行数据提交），旨在为大家提供便利的校内相关数据查询服务，希望能够给疫情影响下的大家提供帮助。由于是人工维护，数据的时效性无法保证。
           若发现与实际情况有出入可点击卡片左下角「纠错」进行数据提交。
@@ -28,7 +28,10 @@ function AboutPage() {
           <Link color='teal' href='mailto:handanwanga@outlook.com'>hawa130</Link>（QQ 764968637）、
           <Link color='teal' href='mailto:zhlzhab12@gmail.com'>Z0</Link>（QQ 2037336335）进行数据添加。
         </Text>
-        <Text my='8px'>若想成为网站的数据库维护志愿者的一员，并在此网站留下你的名字或 ID，可联系我的 QQ 764968637，我们欢迎更多的人加入进来，帮助更多的人。</Text>
+        <Text my='8px'>
+          <del>若想成为网站的数据库维护志愿者的一员，并在此网站留下你的名字或 ID，可联系我的 QQ 764968637，我们欢迎更多的人加入进来，帮助更多的人。</del>
+        </Text>
+        <Text>目前维护者数量充足，暂时不需要志愿者了。</Text>
         <Text my='8px'>本站目前处于高速迭代开发状态，若有不足之处或者有什么功能建议都欢迎提出！由于网站是自己从零开始写的，后端也有部分负责，有需要的功能都可以提出建议。
           欢迎联系邮箱 <Link color='teal' href='mailto:handanwanga@outlook.com'>handanwanga@outlook.com</Link>。</Text>
         <Heading my='16px'>鸣谢</Heading>

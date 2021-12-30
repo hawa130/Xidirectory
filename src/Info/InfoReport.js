@@ -40,6 +40,11 @@ function InfoReport(props) {
     text: '提交',
     data: {},
   });
+  const [isEdit, setIsEdit] = React.useState(false);
+
+  const handleChange = (e) => {
+    setIsEdit(true);
+  };
 
   useEffect(() => {
     setState({
@@ -47,6 +52,7 @@ function InfoReport(props) {
       text: '提交',
       data: {},
     });
+    setIsEdit(false);
   }, [item]);
 
   const onSubmit = async (data) => {
@@ -81,7 +87,7 @@ function InfoReport(props) {
     <Modal closeOnOverlayClick={false} isOpen={isOpen} onClose={onClose} autoFocus={false}>
       <ModalOverlay />
       <ModalContent>
-        <form onSubmit={handleSubmit(onSubmit)}>
+        <form onSubmit={handleSubmit(onSubmit)} onChange={handleChange}>
           <ModalHeader>错误数据上报</ModalHeader>
           <ModalCloseButton />
           <ModalBody pb={6}>
@@ -122,7 +128,7 @@ function InfoReport(props) {
           </ModalBody>
           <ModalFooter>
             <Button colorScheme='teal' mr={3} isLoading={isSubmitting} type='submit'
-                    isDisabled={state.isDisabled}>
+                    isDisabled={state.isDisabled || !isEdit}>
               {state.text}
             </Button>
             <Button onClick={onClose}>取消</Button>

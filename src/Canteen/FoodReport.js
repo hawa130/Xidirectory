@@ -27,7 +27,7 @@ function FoodReport(props) {
   const { handleSubmit, register, setValue, formState: { isSubmitting } } = useForm();
 
   for (const key in food) {
-    if (['window', 'name', 'price', 'shopStatus', 'status', 'unit'].indexOf(key) !== -1) {
+    if (['number', 'window', 'name', 'price', 'shopStatus', 'status', 'unit'].indexOf(key) !== -1) {
       setValue(key, food[key]);
     }
   }
@@ -37,6 +37,11 @@ function FoodReport(props) {
     text: '提交',
     data: {},
   });
+  const [isEdit, setIsEdit] = React.useState(false);
+
+  const handleChange = (e) => {
+    setIsEdit(true);
+  };
 
   useEffect(() => {
     setState({
@@ -44,6 +49,7 @@ function FoodReport(props) {
       text: '提交',
       data: {},
     });
+    setIsEdit(false);
   }, [food]);
 
   const onSubmit = async (data) => {
@@ -70,15 +76,21 @@ function FoodReport(props) {
     <Modal closeOnOverlayClick={false} isOpen={isOpen} onClose={onClose} autoFocus={false}>
       <ModalOverlay />
       <ModalContent>
-        <form onSubmit={handleSubmit(onSubmit)}>
+        <form onSubmit={handleSubmit(onSubmit)} onChange={handleChange}>
           <ModalHeader>错误数据上报</ModalHeader>
           <ModalCloseButton />
           <ModalBody pb={6}>
             <Text>请在这里填写<strong>正确</strong>的数据，我们将在审核后展示。</Text>
-            <FormControl mt={2} isRequired>
-              <FormLabel>窗口名称</FormLabel>
-              <Input {...register('window')} />
-            </FormControl>
+            <HStack mt={2}>
+              <FormControl w='40%'>
+                <FormLabel>窗口编号</FormLabel>
+                <Input {...register('number')} />
+              </FormControl>
+              <FormControl isRequired>
+                <FormLabel>窗口名称</FormLabel>
+                <Input {...register('window')} />
+              </FormControl>
+            </HStack>
             <FormControl mt={2}>
               <FormLabel>食品名称</FormLabel>
               <Input {...register('name')} />
@@ -117,7 +129,7 @@ function FoodReport(props) {
           </ModalBody>
           <ModalFooter>
             <Button colorScheme='teal' mr={3} isLoading={isSubmitting} type='submit'
-                    isDisabled={state.isDisabled}>
+                    isDisabled={state.isDisabled || !isEdit}>
               {state.text}
             </Button>
             <Button onClick={onClose}>取消</Button>

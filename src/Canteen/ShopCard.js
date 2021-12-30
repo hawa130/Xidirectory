@@ -1,16 +1,19 @@
-import { Box, Container, HStack, Spinner, Tag, Text } from '@chakra-ui/react';
-import FoodCard from './FoodCard';
+import { Button, Container, HStack, Spinner, Text } from '@chakra-ui/react';
 import React, { useEffect, useState } from 'react';
 import md5 from 'js-md5';
 import axios from 'axios';
 import FoodSearch from './FoodSearch';
+import ShopCardList from './ShopCardList';
+import RandomBar from './RandomBar';
 
 function ShopCard(props) {
   const { canteen } = props;
+  localStorage.setItem('canteen', canteen);
 
   const [foods, setFoods] = useState([]);
   const [display, setDisplay] = useState([]);
   const [loading, setLoading] = useState(true);
+  const [isRandom, setIsRandom] = useState(false);
 
   const setSessionStorage = async (data, time) => {
     sessionStorage.setItem(canteen, JSON.stringify(data));
@@ -22,6 +25,8 @@ function ShopCard(props) {
   };
 
   const getData = async (canteen) => {
+    setFoods([]);
+    setDisplay([]);
     setLoading(true);
     const timestamp = Date.now();
     const updateTime = sessionStorage.getItem(`${canteen}更新时间`);
@@ -72,49 +77,50 @@ function ShopCard(props) {
     setLoading(false);
   };
 
-  // 获取所有的商家名
-  let shops = display.map((food) => food?.window);
-  shops = Array.from(new Set(shops)); // 商家名去重
-  // 获取商家数据
-  shops = shops.map((shopName) => {
-    const shopData = display.find((food) => {
-      return food.window === shopName;
-    });
-    const foodList = display.filter((food) => food?.window === shopName);
-    const status = !!foodList.find((food) => food.status === true);
-    return {
-      name: shopName,
-      place: shopData?.place,
-      comment: shopData?.shopComment,
-      status: status,
-      foods: foodList,
-    };
-  });
+  const handleRandom = () => {
+    if (!isRandom) {
+      setDisplay([]);
+      setIsRandom(true);
+      return;
+    }
+    let food;
+    do {
+      const random = Math.floor(Math.random() * foods.length);
+      food = foods[random];
+    } while (food?.status === false || food?.comment === '加料');
+    setDisplay([food, ...display]);
+  };
 
-  const shopList = shops.map((shop) => (
-    <Box textAlign='justify' p='8px 8px' w='100%' borderWidth='1px' borderRadius='2xl' overflow='hidden' my={2}>
-      <HStack mb={2}>
-        <Text fontSize='lg' ml={2}><strong>{shop.name}</strong></Text>
-        <Tag>{shop.place}</Tag>
-        <Tag colorScheme={shop.status ? 'green' : 'red'}>{shop.status ? '营业' : '停业'}</Tag>
-      </HStack>
-      <Text fontSize='sm' ml={2} mb={2}>
-        <div dangerouslySetInnerHTML={{ __html: shop.comment }} />
-      </Text>
-      <FoodCard foods={shop.foods} shopStatus={shop.status} />
-    </Box>
-  ));
+  const handleRandomCancel = () => {
+    setIsRandom(false);
+    setDisplay(foods);
+  };
+
+  const handleRandomReset = () => {
+    setDisplay([]);
+  };
 
   return (
-    <>
-      <Container mt={1}>
-        <FoodSearch canteen={canteen} onSearch={onSearch} />
-      </Container>
-      <Container maxW='container.xl' p='0'>
-        {loading ? <Spinner size='xl' my='25%' /> : null}
-        {shopList}
-      </Container>
-    </>
+    <>{
+      loading ? <Spinner size='xl' my='25%' /> :
+        <>
+          <Container mt={1}>
+            <HStack>
+              <Button borderRadius='99px' onClick={handleRandom}>{isRandom ? '随机一个！' : '随机'}</Button>
+              {isRandom ?
+                <RandomBar
+                  handleRandomCancel={handleRandomCancel}
+                  handleRandomReset={handleRandomReset}
+                /> :
+                <FoodSearch canteen={canteen} onSearch={onSearch} />}
+            </HStack>
+          </Container>
+          <Container maxW='container.xl' p='0'>
+            <ShopCardList display={display} />
+            {isRandom && display.length === 0 ? <Text textAlign='center' my={10}>点击「随机一个！」开始随机抽取食物！</Text> : null}
+          </Container>
+        </>
+    }</>
   );
 }
 

@@ -1,4 +1,4 @@
-import { Box, HStack, SimpleGrid, Text, Tooltip, useDisclosure } from '@chakra-ui/react';
+import { Box, HStack, SimpleGrid, Text, Tooltip, useColorModeValue, useDisclosure } from '@chakra-ui/react';
 import FoodReport from './FoodReport';
 import { useState } from 'react';
 
@@ -8,6 +8,8 @@ function FoodCard(props) {
   const { isOpen, onOpen, onClose } = useDisclosure();
 
   const [item, setItem] = useState({});
+  const normal = useColorModeValue('gray.100', 'gray.700');
+  const addon = useColorModeValue('gray.50', 'gray.900');
 
   const handleReport = (food) => {
     setItem({ ...food, shopStatus });
@@ -31,10 +33,19 @@ function FoodCard(props) {
     }
 
     return (
-      <Box backgroundColor={food?.comment === '加料' ? 'gray.50' : 'gray.100'}
+      <Box bg={food?.comment === '加料' ? addon : normal}
            borderRadius='lg' px={2} py={1}>
         <HStack>
-          <Text fontSize='sm'>{food?.name ? food?.name : <Text color='gray.500'>名称未知</Text>}</Text>
+          <Text fontSize='sm'>
+            {food?.name ?
+              (
+                food?.status ?
+                  food.name :
+                  <Text as='del' color='gray.500'>{food.name}</Text>
+              ) :
+              <Text color='gray.500'>名称未知</Text>
+            }
+          </Text>
         </HStack>
         <HStack>
           <Tooltip hasArrow label='点击纠错'>
