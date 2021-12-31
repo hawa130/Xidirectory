@@ -49,7 +49,9 @@ function FoodCard(props) {
         </HStack>
         <HStack>
           <Tooltip hasArrow label='点击纠错'>
-            <Text fontSize='lg' onClick={() => handleReport(food)}>{price}</Text>
+            <Text fontSize='lg' onClick={() => handleReport(food)} color={food?.status ? null : 'gray.500'}>
+              {price}
+            </Text>
           </Tooltip>
           <Text fontSize='sm' color='gray.500'>{`/ ${food?.unit}`}</Text>
         </HStack>

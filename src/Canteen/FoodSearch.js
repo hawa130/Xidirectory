@@ -1,5 +1,5 @@
 import { Input, InputGroup, InputLeftElement } from '@chakra-ui/react';
-import { Search } from '@icon-park/react';
+import { Filter } from '@icon-park/react';
 import React from 'react';
 
 function FoodSearch(props) {
@@ -12,12 +12,12 @@ function FoodSearch(props) {
 
   return (
     <InputGroup>
-      <InputLeftElement pointerEvents='none' children={<Search />} />
+      <InputLeftElement pointerEvents='none' children={<Filter />} />
       <Input
         id='search-input'
         variant='filled'
         borderRadius='99px'
-        placeholder={`搜索${canteen}餐厅菜品、窗口`}
+        placeholder={`筛选${canteen}餐厅楼层、菜品、窗口，多条件用空格分隔`}
         onChange={handleChange}
       />
     </InputGroup>

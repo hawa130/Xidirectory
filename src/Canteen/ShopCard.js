@@ -48,6 +48,7 @@ function ShopCard(props) {
         params: {
           where: { 'place': { '$regex': canteen } },
           limit: 1000,
+          order: '-status,-updatedAt',
         },
       });
     const data = res.data.results;
@@ -70,8 +71,15 @@ function ShopCard(props) {
       setLoading(false);
       return;
     }
+    const searchList = search.split(' ');
+    console.log(searchList);
     const filteredFoods = foods.filter((food) => {
-      return food.name.includes(search) || food?.window?.includes(search);
+      let isMatch = true;
+      for (search of searchList) {
+        if (search === '') continue;
+        isMatch = isMatch && (food.name.includes(search) || food?.window?.includes(search) || food?.place.includes(search));
+      }
+      return isMatch;
     });
     setDisplay(filteredFoods);
     setLoading(false);
