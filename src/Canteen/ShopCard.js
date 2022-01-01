@@ -72,7 +72,6 @@ function ShopCard(props) {
       return;
     }
     const searchList = search.split(' ');
-    console.log(searchList);
     const filteredFoods = foods.filter((food) => {
       let isMatch = true;
       for (search of searchList) {

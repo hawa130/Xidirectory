@@ -1,33 +1,42 @@
-import { Tab, TabList, TabPanel, TabPanels, Tabs } from '@chakra-ui/react';
-import TimeShare from './Queue/TimeShare';
+import { Box, Tab, TabList, Tabs } from '@chakra-ui/react';
+import { Link, Route, Routes, useLocation } from 'react-router-dom';
 import InfoPage from './Info/InfoPage';
 import AboutPage from './About/AboutPage';
 import CanteenPage from './Canteen/CanteenPage';
+import QueuePage from './Queue/QueuePage';
 
 function MainPage() {
+  const { pathname } = useLocation();
+  const tabs = ['/canteen', '/info', '/queue', '/about'];
+  let defaultIndex = tabs.indexOf(pathname);
+  defaultIndex = defaultIndex === -1 ? 0 : defaultIndex;
+
   return (
-    <Tabs variant='line' align='center' colorScheme='teal' isLazy={true} defaultIndex={0}>
+    <Tabs variant='line' align='center' colorScheme='teal' isLazy={true} defaultIndex={defaultIndex}>
       <TabList>
-        <Tab>食堂查询</Tab>
-        <Tab>服务查询</Tab>
-        <Tab>排队分享</Tab>
-        <Tab>关于</Tab>
+        <Link to='/canteen'>
+          <Tab key='/canteen'>食堂查询</Tab>
+        </Link>
+        <Link to='/info'>
+          <Tab key='/info'>服务查询</Tab>
+        </Link>
+        <Link to='/queue'>
+          <Tab key='/queue'>排队分享</Tab>
+        </Link>
+        <Link to='/about'>
+          <Tab key='/about'>关于</Tab>
+        </Link>
       </TabList>
 
-      <TabPanels>
-        <TabPanel p='0'>
-          <CanteenPage />
-        </TabPanel>
-        <TabPanel p='0'>
-          <InfoPage />
-        </TabPanel>
-        <TabPanel p='0'>
-          <TimeShare />
-        </TabPanel>
-        <TabPanel p='0'>
-          <AboutPage />
-        </TabPanel>
-      </TabPanels>
+      <Box>
+        <Routes>
+          <Route path='/' element={<CanteenPage />} />
+          <Route path='/canteen' element={<CanteenPage />} />
+          <Route path='/info' element={<InfoPage />} />
+          <Route path='/queue' element={<QueuePage />} />
+          <Route path='/about' element={<AboutPage />} />
+        </Routes>
+      </Box>
     </Tabs>
   );
 }

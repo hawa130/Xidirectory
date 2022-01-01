@@ -6,8 +6,7 @@ function Board(props) {
       <HStack>
         <Text as='strong'>{props.board.title}</Text>
         <Spacer />
-        {/*时间已隐藏*/}
-        <Text color='gray.400' fontSize='sm' display='none'>{props.board.updatedAt}</Text>
+        <Text color='gray.400' fontSize='sm'>{props.board.updatedAt}</Text>
       </HStack>
       <Text>
         <div dangerouslySetInnerHTML={{ __html: props.board.content }} />

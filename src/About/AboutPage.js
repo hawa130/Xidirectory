@@ -6,10 +6,14 @@ function AboutPage() {
     <Box p={4}>
       <Container textAlign='left' maxW='container.md'>
         <Heading my='16px'>最新动态</Heading>
+        <Text my='8px'>1 月 2 日增加分地点上报查询核酸检测排队时长功能，因为早期代码的高耦合度，修改花了不少功夫，请见谅。</Text>
+        <Text my='8px'>大家 2022 年新年快乐！如果用户量足够多，后续或许会增加需求分享功能。</Text>
+        <Text my='8px'>12 月 31 日更新随机食物功能，点击「随机」按钮体验吧；新增更详细的条件筛选功能，可以用空格键隔开多个条件，进行更细的筛选。</Text>
         <Text my='8px'>12 月 30 日更新三大食堂菜单信息，拥有超过 1500 条数据，快速检索食品、商家，不再苦恼于这顿饭要室友带什么。提前检索，做好充足准备再去带饭吧。</Text>
         <Text my='8px'>数据库于 29 日建立，根据网上食堂菜单的照片手动录入，因此我们并不清楚商家的营业状况。如有错误，一定要记得提交正确的信息，这样才能帮到更多的人。</Text>
         <Text my='8px'>对策府库借助我们的数据库创建了
-          <Link href='https://docs.qq.com/sheet/DWUJhYVVOR1VMcVla?tab=k75e6m' isExternal> 疫情下的餐饮评价表 <Share size='12' />
+          <Link color='teal' href='https://docs.qq.com/sheet/DWUJhYVVOR1VMcVla?tab=k75e6m' isExternal> 疫情下的餐饮评价表 <Share
+            size='12' />
           </Link>
           ，欢迎大家前去对商家或菜品发表自己的看法。
         </Text>
@@ -26,7 +30,7 @@ function AboutPage() {
           如有未收录的商家，可联系维护者
           <Link color='teal' href='mailto:superbart_chen@qq.com'> SuperBart</Link>、
           <Link color='teal' href='mailto:handanwanga@outlook.com'>hawa130</Link>（QQ 764968637）、
-          <Link color='teal' href='mailto:zhlzhab12@gmail.com'>Z0</Link>（QQ 2037336335）进行数据添加。
+          <Link color='teal' href='mailto:zhlzhab12@gmail.com'>Z0</Link>（QQ 2037336335）进行数据添加。（点击名字即可发送邮件）
         </Text>
         <Text my='8px'>
           <del>若想成为网站的数据库维护志愿者的一员，并在此网站留下你的名字或 ID，可联系我的 QQ 764968637，我们欢迎更多的人加入进来，帮助更多的人。</del>
@@ -41,27 +45,30 @@ function AboutPage() {
         <UnorderedList>
           <ListItem><Link color='teal' href='https://benderblog.github.io/' isExternal>SuperBart <Share
             size='12' /></Link>
-            （<Link href='https://benderblog.github.io/SpiritFlown.html' isExternal>西电疫情互助文档汇总版 <Share
+            （<Link color='teal' href='https://benderblog.github.io/SpiritFlown.html' isExternal>西电疫情互助文档汇总版 <Share
               size='12' /></Link> 作者）</ListItem>
           <ListItem>Z0（不愿意透露名字的Z0）</ListItem>
           <ListItem>Yangxiansen</ListItem>
-          <ListItem>康师傅</ListItem>
+          <ListItem><Link color='teal' href='https://blog.ksfu.top/' isExternal>康师傅 <Share
+            size='12' /></Link></ListItem>
           <ListItem>小北</ListItem>
           <ListItem>DAWNMX</ListItem>
           <ListItem>木生</ListItem>
+          <ListItem>xeonds</ListItem>
         </UnorderedList>
         <Text my='8px'>
-          感谢 <Link href='https://docs.qq.com/sheet/DWmttV0hZbFFYQmVv?tab=BB08J2' isExternal>腾讯互助文档 <Share
+          感谢 <Link color='teal' href='https://docs.qq.com/sheet/DWmttV0hZbFFYQmVv?tab=BB08J2' isExternal>腾讯互助文档 <Share
           size='12' /></Link> 发起者 gyk。
         </Text>
         <Text my='8px'>
-          感谢 <Link href='https://geek-tech.club/' isExternal>西电极创工作室 <Share
+          感谢 <Link color='teal' href='https://geek-tech.club/' isExternal>西电极创工作室 <Share
           size='12' /></Link> 提供的后端服务器，以及工作室学长韩翔宇提供的后端程序。
         </Text>
         <Text my='8px'>
           感谢
           <Link color='teal' href='https://moefactory.com/' isExternal> Robotxm <Share size='12' /></Link>（电表开发者）
-          提供的本数据库 <Link href='https://myxdu.moefactory.com/ncov/' isExternal>电表版本 <Share size='12' /></Link>（电表版功能将会与本站同步更新）。
+          提供的本数据库 <Link color='teal' href='https://myxdu.moefactory.com/ncov/' isExternal>电表版本 <Share
+          size='12' /></Link>（电表版功能将会与本站同步更新）。
         </Text>
         <Text my='8px'>感谢对策府库的宣传。</Text>
         <Text my='8px'>感谢以下同学的支持：Dimole。</Text>

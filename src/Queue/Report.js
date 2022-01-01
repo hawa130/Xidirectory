@@ -12,6 +12,8 @@ import { useForm } from 'react-hook-form';
 import axios from 'axios';
 
 function Report(props) {
+  const { place } = props;
+
   const {
     handleSubmit,
     register,
@@ -22,8 +24,6 @@ function Report(props) {
     const { averageTime, stdevTime, resultLength } = props;
     let { waitTime } = submitData;
     waitTime = Number(waitTime);
-
-    // console.log(averageTime, stdevTime, waitTime);
 
     if (isNaN(waitTime) || waitTime < 0 ||
       ((resultLength > 6) && (waitTime > 25 || waitTime < 5) && (Math.abs(waitTime - averageTime) > 3 * stdevTime))) {
@@ -39,6 +39,7 @@ function Report(props) {
           Ticket: res.ticket,
           Randstr: res.randstr,
           result: waitTime,
+          place: place,
         });
       }
     });

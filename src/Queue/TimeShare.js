@@ -2,66 +2,13 @@ import React, { useEffect } from 'react';
 import { Box, Container, HStack, Skeleton, Text, VStack } from '@chakra-ui/react';
 import StatDisplay from './StatDisplay';
 import Report from './Report'; // 旧版API
-import axios from 'axios';
 import TableDisplay from './TableDisplay';
 import Board from './Board';
 
-const getReportData = async () => {
-  const res = await axios.get('https://ncov-api.geek-tech.club/api/records/?during=3600');
-  const resList = res.data?.results;
-  if (resList.length === 0) {
-    return {
-      waitingTime: '--',
-      updateTime: '无最近数据',
-      averageTime: NaN,
-      stdevTime: NaN,
-      results: [],
-    };
-  }
-  const rawResults = resList.map((row) => {
-    return {
-      waitTime: row?.waitTime,
-      updatedAt: new Date(row?.updatedAt).toLocaleString('zh-CN', { hour12: false }),
-    };
-  });
-  const result = resList[0];
-  const waitingTime = result['waitTime'];
-  let updateTime = result['updatedAt'];
-  updateTime = new Date(updateTime).toLocaleString('zh-CN', { hour12: false });
-  let averageTime = rawResults.reduce((acc, cur) => acc + cur.waitTime, 0) / rawResults.length;
-  let stdevTime = Math.sqrt(rawResults.reduce((acc, cur) => acc + Math.pow(cur.waitTime - averageTime, 2), 0) / rawResults.length);
-  const results = rawResults;
-  return {
-    waitingTime,
-    updateTime,
-    averageTime,
-    stdevTime,
-    results,
-  };
-};
+function TimeShare(props) {
+  const { getData, place } = props;
+  localStorage.setItem('place', place);
 
-const getBoardData = async () => {
-  const rawBoard = await axios.get('https://ncov-api.geek-tech.club/api/boards/');
-  const boards = rawBoard.data?.boards;
-  const board = boards[0];
-  return {
-    title: '公告',
-    content: board['content'],
-    // updatedAt: new Date(board['createAt']).toLocaleString('zh-CN', { hour12: false }),
-    updatedAt: board['createAt'],
-  };
-};
-
-const getData = async () => {
-  const reportData = await getReportData();
-  const board = await getBoardData();
-  return {
-    board,
-    ...reportData,
-  };
-};
-
-function TimeShare() {
   const [state, setData] = React.useState({
     waitingTime: <Skeleton width='100px' height='80px' />,
     updateTime: '----/--/-- --:--:--',
@@ -76,19 +23,19 @@ function TimeShare() {
   });
 
   useEffect(() => {
-    getData().then((data) => {
+    getData(place).then((data) => {
       setData(data);
     });
-  }, []);
+  }, [place]);
 
   const refreshData = () => {
-    getData().then((data) => {
+    getData(place).then((data) => {
       setData(data);
     });
   };
 
   return (
-    <Box p={4}>
+    <Box>
       <Container maxW='container.md' p='0'>
         <VStack align='center'>
           <Board board={state.board} />
@@ -102,6 +49,7 @@ function TimeShare() {
             stdevTime={state.stdevTime}
             resultLength={state.results.length}
             getData={refreshData}
+            place={place}
           />
           <Text>最近 1 小时的 {state.results.length} 次提交等待时间平均值</Text>
           <HStack align='baseline' style={{ marginTop: 0 }}>
