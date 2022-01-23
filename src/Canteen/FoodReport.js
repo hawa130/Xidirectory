@@ -73,7 +73,7 @@ function FoodReport(props) {
   };
 
   return (
-    <Modal closeOnOverlayClick={false} isOpen={isOpen} onClose={onClose} autoFocus={false}>
+    <Modal closeOnOverlayClick={true} isOpen={isOpen} onClose={onClose} autoFocus={false}>
       <ModalOverlay />
       <ModalContent>
         <form onSubmit={handleSubmit(onSubmit)} onChange={handleChange}>

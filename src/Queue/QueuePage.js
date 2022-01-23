@@ -63,7 +63,7 @@ const getData = async (place) => {
   };
 };
 
-const places = ['北操场', '信远楼', '图书馆'];
+const places = ['北操场', '信远楼', '图书馆', 'E楼'];
 
 function QueuePage(props) {
   const place = localStorage.getItem('place');

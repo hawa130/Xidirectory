@@ -76,7 +76,7 @@ function ShopCard(props) {
       let isMatch = true;
       for (search of searchList) {
         if (search === '') continue;
-        isMatch = isMatch && (food.name.includes(search) || food?.window?.includes(search) || food?.place.includes(search));
+        isMatch = isMatch && ((food.name && food.name.includes(search)) || food?.window?.includes(search) || food?.place.includes(search));
       }
       return isMatch;
     });

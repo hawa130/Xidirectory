@@ -5,6 +5,7 @@ import {
   Collapse,
   FormControl,
   FormLabel,
+  HStack,
   Input,
   Link,
   ListItem,
@@ -15,6 +16,7 @@ import {
   ModalFooter,
   ModalHeader,
   ModalOverlay,
+  Spacer,
   Switch,
   Text,
   Textarea,
@@ -84,7 +86,7 @@ function InfoReport(props) {
   const handleToggle = () => setShow(!show);
 
   return (
-    <Modal closeOnOverlayClick={false} isOpen={isOpen} onClose={onClose} autoFocus={false}>
+    <Modal closeOnOverlayClick={true} isOpen={isOpen} onClose={onClose} autoFocus={false}>
       <ModalOverlay />
       <ModalContent>
         <form onSubmit={handleSubmit(onSubmit)} onChange={handleChange}>
@@ -103,7 +105,11 @@ function InfoReport(props) {
               <Text mb={3}>数据库的准确有效需要大家的共同维护，请务必确认自己提供的数据是准确的。</Text>
             </Collapse>
             <FormControl isRequired>
-              <FormLabel>名称</FormLabel>
+              <HStack>
+                <FormLabel>名称</FormLabel>
+                <Spacer />
+                <Text my='8px' color='teal' onClick={() => setValue('name', null)}><Link>清空</Link></Text>
+              </HStack>
               <Input {...register('name')} />
             </FormControl>
             <FormControl mt={2}>
@@ -111,7 +117,11 @@ function InfoReport(props) {
               <Switch colorScheme='teal' size='lg' {...register('status')} />
             </FormControl>
             <FormControl mt={2}>
-              <FormLabel>描述</FormLabel>
+              <HStack>
+                <FormLabel>描述</FormLabel>
+                <Spacer />
+                <Text my='8px' color='teal' onClick={() => setValue('description', null)}><Link>清空</Link></Text>
+              </HStack>
               <Textarea {...register('description')} />
             </FormControl>
             <FormControl mt={2}>
