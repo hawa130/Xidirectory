@@ -6,6 +6,13 @@ function AboutPage() {
     <Box p={4}>
       <Container textAlign='left' maxW='container.md'>
         <Heading my='16px'>最新动态</Heading>
+        <Text my='8px'>
+          疫情已经过去！在这场疫情中，网站已经发挥它应有的作用，感谢所有付出的志愿者以及数据上报者，以及使用过本网站的你。这个网站现在也只能起到查菜品和商家列表的作用了吧。我们
+          <Link color='teal' href='https://github.com/hawa130' isExternal> GitHub <Share
+            size='12' />
+          </Link>
+          再见！
+        </Text>
         <Text my='8px'>大家寒假愉快！留校的同学可以继续上报哦。</Text>
         <Text my='8px'>尽管近期忙碌，但我们依然会坚持更新数据库的。数据库信息延迟可能较大，请见谅。</Text>
         <Text my='8px'>愿校内生活早日恢复正常。</Text>

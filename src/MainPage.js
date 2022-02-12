@@ -15,13 +15,13 @@ function MainPage() {
     <Tabs variant='line' align='center' colorScheme='teal' isLazy={true} defaultIndex={defaultIndex}>
       <TabList>
         <Link to='/canteen'>
-          <Tab key='/canteen'>食堂查询</Tab>
+          <Tab key='/canteen'>食堂菜单</Tab>
         </Link>
         <Link to='/info'>
-          <Tab key='/info'>服务查询</Tab>
+          <Tab key='/info'>服务状况</Tab>
         </Link>
         <Link to='/queue'>
-          <Tab key='/queue'>排队分享</Tab>
+          <Tab key='/queue'>排队时长</Tab>
         </Link>
         <Link to='/about'>
           <Tab key='/about'>关于</Tab>
