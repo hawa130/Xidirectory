@@ -1,68 +1,77 @@
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+# Xidirectory | 西电目录
 
-## Available Scripts
+这是一个建立于特殊时期的小站，提供疫情下的校园信息共享服务。2021 年底，西安疫情爆发，全市封城，西安电子科技大学也积极响应号召进行封闭式管理，综合楼商家所剩无几，并坚持每日核酸检测、实行凭出入证食堂带饭制度。校园疫情信息需要一个集中的共享平台，为此[西电目录](https://ncov.hawa130.com/about)网站诞生。
 
-In the project directory, you can run:
+西电目录提供了实用的「校内食堂菜单」、「校内服务状况查询」、「核酸检测排队时长分享」功能。它的诞生与存在离不开各位志愿者们的数据录入、数据维护，也离不开各位使用者的主动数据上报。
 
-### `yarn start`
+现在，这个网站已经完成了它的使命。本仓库是网站的前端代码仓库，留作纪念。
 
-Runs the app in the development mode.<br />
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+## 技术栈
+### 前端
+- **脚手架**：[Create React App](https://github.com/facebook/create-react-app)
+- **UI 框架**：[Chakra UI](https://chakra-ui.com)
 
-The page will reload if you make edits.<br />
-You will also see any lint errors in the console.
+### 后端
+- **排队时长分享**：[Django](https://www.djangoproject.com)
+- **其他**：[LeanCloud](https://www.leancloud.cn) 结构化数据
 
-### `yarn test`
+## 本地开发指南
+运行`yarn build` 即可构建出静态页面，随便放个静态页面托管就能访问了。
 
-Launches the test runner in the interactive watch mode.<br />
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+运行`yarn start` 即可在本地进行开发调试，实时预览，不过性能比编译出的稍差。
 
-### `yarn build`
+## 故事
+我一开始创建这个网站只是想练练新发现的 UI 框架，于是做了一个简单的核酸检测排队时长上报功能。当时没有验证码，没有数据过滤，但是也只在小范围内传播。后来有群友给我宣传，请求量越来越多，一度达到 LeanCloud 开发版上限（30000 次/天）。在这天夜里，我连忙把接口换成了极创工作室服务器的，至少这种简单请求，高并发应该不成问题，顺便还加入了验证码，阻止了垃圾请求（但依然抵挡不住大家的热情，效果真的很不错）。
 
-Builds the app for production to the `build` folder.<br />
-It correctly bundles React in production mode and optimizes the build for the best performance.
+当时也闲的没事把疫情互助文档的内容整理成了结构化数据，因此我也萌生了给这些数据做个前端的念头，所以第二个加入的功能是服务状况。当时小梦也给做了个前端。总之，反正能帮到更多的人就行。我想，借助大家的力量也是很重要的，于是就有了现在的完全体版本：有了「纠错」按钮。
 
-The build is minified and the filenames include the hashes.<br />
-Your app is ready to be deployed!
+第三个加入的功能便是食堂菜单了，这个功能在实施宿舍楼管制之后的第二天晚上才上线，当时 8 个志愿者一起录入数据，最后手动录入了 1500 多条，令人敬佩（相对地，综合楼的数据只有 200 余条）。因为是纯文本的数据，所以它具有便于检索和随机的优势。
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+这里不得不批评一下学校官方推的「XDer 今天吃什么」小程序，这个小程序仅仅是放了食堂的菜单图片上去，但是学校的宣传力度实在是过猛，实在是尬。但是这也是某个教授的的项目，能给得到这么大力度的宣传也在意料之中。
 
-### `yarn eject`
+其实每一条上报的数据都会发到志愿者的邮箱进行通知，当时是集中一段时间对今日上报的数据进行统计、更新。其实反馈的人比意料之中要多，能一天十几条。不过我的反馈邮箱只收到一封邮件，怪少的。当然，那封邮件提出的建议有点难以实现，最好当然也没做出来~~（画大饼）~~。说到画大饼，学校组织的跨年晚会还采访我们了，在采访期间我们各种~~画大饼~~展望未来。
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+## 西电目录的关于页面
+[原页面](https://ncov.hawa130.com/about)
+### 关于本站
+本站提供新冠肺炎疫情影响下西安电子科技大学的校内食堂菜单、校内服务状况查询、核酸检测排队时长分享服务。
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+数据来自于共享文档整理、维护志愿者的人肉调查以及热心同学的提交（可以点击「纠错」进行数据提交），旨在为大家提供便利的校内相关数据查询服务，希望能够给疫情影响下的大家提供帮助。由于是人工维护，数据的时效性无法保证。 若发现与实际情况有出入可点击卡片左下角「纠错」进行数据提交。
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+如有未收录的商家，可联系维护者 SuperBart、hawa130（QQ 764968637）、Z0（QQ 2037336335）进行数据添加。（点击名字即可发送邮件）
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+~~若想成为网站的数据库维护志愿者的一员，并在此网站留下你的名字或 ID，可联系我的 QQ 764968637，我们欢迎更多的人加入进来，帮助更多的人。~~
+目前维护者数量充足，暂时不需要志愿者了。
 
-## Learn More
+本站目前处于高速迭代开发状态，若有不足之处或者有什么功能建议都欢迎提出！由于网站是自己从零开始写的，后端也有部分负责，有需要的功能都可以提出建议。 欢迎联系邮箱 handanwanga@outlook.com。
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+### 鸣谢
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+感谢以下数据库维护志愿者的付出（排名不分先后）。
 
-### Code Splitting
+- [SuperBart](https://www.superbart.xyz)（西电疫情互助文档汇总版作者）
+- Z0（不愿意透露名字的Z0）
+- Yangxiansen
+- [康师傅](https://blog.ksfu.top/)
+- 小北
+- DAWNMX
+- 木生
+- xeonds
 
-This section has moved here: https://facebook.github.io/create-react-app/docs/code-splitting
+感谢腾讯互助文档发起者 gyk。<br />
+感谢[西电极创工作室](https://geek-tech.club/)提供的后端服务器，以及工作室学长韩翔宇提供的后端程序。<br />
+感谢 [Robotxm](https://moefactory.com)（电表开发者）提供的本数据库电表版本（电表版功能将会与本站同步更新）。<br />
+感谢对策府库的宣传。<br />
+感谢以下同学的支持：Dimole。<br />
 
-### Analyzing the Bundle Size
+## 页面存档
+### 食堂菜单
+<img width="1440" alt="image" src="https://user-images.githubusercontent.com/26119430/153723890-c63d5085-b7a7-4976-b304-2eb3af4afccf.png">
 
-This section has moved here: https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size
+### 服务状况
+<img width="1440" alt="image" src="https://user-images.githubusercontent.com/26119430/153723900-da2c38c9-72cc-40f9-a1f4-0015d507ff07.png">
 
-### Making a Progressive Web App
+### 排队时长
+<img width="1440" alt="image" src="https://user-images.githubusercontent.com/26119430/153723880-4c176c9b-1930-4a06-9d55-d9ff8403a0b0.png">
 
-This section has moved here: https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app
-
-### Advanced Configuration
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/advanced-configuration
-
-### Deployment
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/deployment
-
-### `yarn build` fails to minify
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify
+感谢你能够看到这里，这是 18-21 级西电学子难忘的一段历史。
